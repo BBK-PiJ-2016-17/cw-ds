@@ -20,8 +20,8 @@ public class ReturnObjectImpl implements ReturnObject {
 	}
 
 	public ReturnObjectImpl(ErrorMessage errorMsg) {
-		this.errorMsg = errorMsg;
 		this.object = null;
+		this.errorMsg = errorMsg;
 	}
 
 	/**

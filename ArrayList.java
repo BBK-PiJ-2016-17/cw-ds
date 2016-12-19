@@ -73,8 +73,10 @@ public class ArrayList implements List {
 	public ReturnObject get(int index) {
 
 		if (isEmpty()) {
+			System.out.println("Error: Empty structure!");
 			return new ReturnObjectImpl(ErrorMessage.EMPTY_STRUCTURE);
 		} else if (index < 0 || index >= size) {
+			System.out.println("Error: Index out of bounds!");
 			return new ReturnObjectImpl(ErrorMessage.INDEX_OUT_OF_BOUNDS);
 		}
 
@@ -97,21 +99,26 @@ public class ArrayList implements List {
 	@Override
 	public ReturnObject remove(int index) {
 
-		int i;
-
 		if (isEmpty()) {
+			System.out.println("Error: Empty structure!");
 			return new ReturnObjectImpl(ErrorMessage.EMPTY_STRUCTURE);
 		} else if (index < 0 || index >= size) {
+			System.out.println("Error: Index out of bounds!");
 			return new ReturnObjectImpl(ErrorMessage.INDEX_OUT_OF_BOUNDS);
 		}
 
-		Object removedItem = listOfItems[index];
+		// Object removedItem = listOfItems[index];
+		ReturnObject removedItem = get(index);
 
-		for (i = index + 1; i < size; i++) {
+		for (int i = index + 1; i < size; i++) {
 			listOfItems[i] = listOfItems[i-1];
 		}
+		listOfItems[size - 1] = null;
+		listOfItems[listOfItems.length - 1] = null;
+		size--;
 
-		return new ReturnObjectImpl(removedItem);
+		// return new ReturnObjectImpl(removedItem);
+		return removedItem;
 	}
 
 	/**
@@ -136,8 +143,10 @@ public class ArrayList implements List {
 	@Override
 	public ReturnObject add(int index, Object item) {
 		if (index < 0 || index >= size) {
+			System.out.println("Error: Index out of bounds!");
 			return new ReturnObjectImpl(ErrorMessage.INDEX_OUT_OF_BOUNDS);
 		} else if (item == null) {
+			System.out.println("Error: Invalid argument!");
 			return new ReturnObjectImpl(ErrorMessage.INVALID_ARGUMENT);
 		} else {
 			if (listOfItems.length == size) {

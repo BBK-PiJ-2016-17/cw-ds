@@ -19,7 +19,20 @@
  * 
  * @author Ginestra Ferraro
  */
+
 public class ArrayList implements List {
+
+	private Object[] listOfItems;
+	private int size;
+
+	private final static int DEFAULT_SIZE = 25;
+	
+	// Constructor
+	public ArrayList() {
+		this.listOfItems = new Object[ArrayList.DEFAULT_SIZE];
+		this.size = size;
+	}
+
 	/**
 	 * Returns true if the list is empty, false otherwise. 
 	 * 
@@ -55,8 +68,17 @@ public class ArrayList implements List {
 	 * @return the element or an appropriate error message, 
 	 *         encapsulated in a ReturnObject
 	 */
+
+	@Override
 	public ReturnObject get(int index) {
-		return object;
+
+		if (isEmpty()) {
+			return new ReturnObjectImpl(ErrorMessage.EMPTY_STRUCTURE);
+		} else if (index < 0 || index >= size) {
+			return new ReturnObjectImpl(ErrorMessage.INDEX_OUT_OF_BOUNDS);
+		}
+
+		return new ReturnObjectImpl(listOfItems[index]);
 	}
 
 	/**
@@ -71,8 +93,27 @@ public class ArrayList implements List {
 	 * @return the element or an appropriate error message, 
 	 *         encapsulated in a ReturnObject
 	 */
+
+	@Override
 	public ReturnObject remove(int index) {
-		return object;
+
+		int i;
+
+		if (isEmpty()) {
+			return new ReturnObjectImpl(ErrorMessage.EMPTY_STRUCTURE);
+		} else if (index < 0 || index >= size) {
+			return new ReturnObjectImpl(ErrorMessage.INDEX_OUT_OF_BOUNDS);
+		}
+
+		Object removedItem = listOfItems[index];
+
+		size--;
+
+		for (i = index; i <= size; i++) {
+			listOfItems[i] = listOfItems[i-1];
+		}
+
+		return new ReturnObjectImpl(removedItem);
 	}
 
 	/**
@@ -90,11 +131,28 @@ public class ArrayList implements List {
 	 * @param index the position at which the item should be inserted in
 	 *              the list
 	 * @param item the value to insert into the list
-	 * @return an ReturnObject, empty if the operation is successful
+	 * @return a ReturnObject, empty if the operation is successful
 	 *         or containing an appropriate error message otherwise
 	 */
-	public ReturnObject add(int index, Object item) {
 
+	@Override
+	public ReturnObject add(int index, Object item) {
+		if (index < 0 || index >= size) {
+			return new ReturnObjectImpl(ErrorMessage.INDEX_OUT_OF_BOUNDS);
+		} else if (item == null) {
+			return new ReturnObjectImpl(ErrorMessage.INVALID_ARGUMENT);
+		} else {
+			if (listOfItems.length == size) {
+				moreItems();
+			}
+			int current;
+			for(current = size(); current > index; current--) {
+				listOfItems[current + 1] = listOfItems[current];
+			}
+			listOfItems[index] = item;
+			size = size() + 1;
+			return new ReturnObjectImpl(ErrorMessage.NO_ERROR);
+		}
 	}
 
 	/**
@@ -105,10 +163,33 @@ public class ArrayList implements List {
 	 * returned.
 	 * 
 	 * @param item the value to insert into the list
-	 * @return an ReturnObject, empty if the operation is successful
+	 * @return a ReturnObject, empty if the operation is successful
 	 *         or containing an appropriate error message otherwise
 	 */
-	public ReturnObject add(Object item) {
 
+	@Override
+	public ReturnObject add(Object item) {
+		if(item == null) {
+			return new ReturnObjectImpl(ErrorMessage.INVALID_ARGUMENT);
+		} else {
+			if(size() == listOfItems.length) {
+				moreItems();
+			}
+			listOfItems[size()] = item;
+			size = size()+ 1;
+			return new ReturnObjectImpl(ErrorMessage.NO_ERROR);
+		}
+	}
+
+	/**
+	 * Assign more space to listOfItems array
+	 */
+	private void moreItems(){
+		int currentSpace = listOfItems.length;
+		Object[] newListOfItems = new Object[currentSpace * 2];
+		for(int i = 0; i < currentSpace; i++){
+			newListOfItems[i] = listOfItems[i];
+		}
+		listOfItems = newListOfItems;
 	}
 }

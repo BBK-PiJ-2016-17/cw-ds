@@ -107,9 +107,7 @@ public class ArrayList implements List {
 
 		Object removedItem = listOfItems[index];
 
-		size--;
-
-		for (i = index; i <= size; i++) {
+		for (i = index + 1; i < size; i++) {
 			listOfItems[i] = listOfItems[i-1];
 		}
 

@@ -32,6 +32,15 @@ public class ArrayListTest {
 
         System.out.println();
 
+        System.out.println("This is item 0 before I remove: " + myList.get(0));
+        System.out.println("This is item 1 before I remove: " + myList.get(2));
+
+        //Removing items
+        myList.remove(0);
+
+        System.out.println("This is item 0 after I removed it: " + myList.get(0));
+
         System.out.println(myList.get(2));
+
     }
 }

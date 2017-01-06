@@ -7,9 +7,7 @@
 public class ArrayListTest {
     public static void main(String[] args) {
         ArrayListTest test = new ArrayListTest();
-        test.launch();  
-
-
+        test.launch();
     }
 
     public void launch() {

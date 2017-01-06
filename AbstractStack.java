@@ -4,7 +4,7 @@
  * 
  * Not all operations on a stack will always be successful. For
  * example, a programmer may try to pop an element from an empty
- * stack. Since we hace not covered exceptions yet, we need another
+ * stack. Since we have not covered exceptions yet, we need another
  * mechanism to report errors. In order to do that, methods of this
  * list will return a {@see ReturnObject} that will contain either an
  * object or an error value of the right kind (as defined in {@see

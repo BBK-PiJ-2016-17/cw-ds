@@ -5,7 +5,13 @@
  */
 
 public class ReturnObjectImplTest {
-	public static void main(String[] args) {
+	
+    public static void main(String[] args) {
+        ReturnObjectImplTest test = new ReturnObjectImplTest();
+        test.launch();
+    }
+
+	public void launch() {
 
 		ReturnObject result = new ReturnObjectImpl("1st");
 		

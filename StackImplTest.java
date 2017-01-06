@@ -7,6 +7,7 @@
  */
 
 public class StackImplTest {
+	
     public static void main(String[] args) {
         StackImplTest test = new StackImplTest();
         test.launch();

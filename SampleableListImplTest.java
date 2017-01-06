@@ -9,7 +9,13 @@
  */
 
 public class SampleableListImplTest {
-	public static void main(String[] args) {
+	
+    public static void main(String[] args) {
+        SampleableListImplTest test = new SampleableListImplTest();
+        test.launch();
+    }
+
+	public void launch() {
 		SampleableList oddListTest = new SampleableListImpl();
 
 		oddListTest.add("ZeroIndex");

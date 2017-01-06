@@ -129,9 +129,8 @@ public class LinkedList implements List {
 				newListNode.setPrev(newListNode.getPrev());
 				firstItem.setNext(newListNode);
 			}
-
-			size = size() + 1;
 			
+			size = size() + 1;
 			return new ReturnObjectImpl(ErrorMessage.NO_ERROR);
 		}
 	}

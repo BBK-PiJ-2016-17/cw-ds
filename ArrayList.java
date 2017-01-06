@@ -15,188 +15,191 @@
  * covered exceptions yet, we need another mechanism to report
  * errors. In order to do that, methods of this list will return a
  * {@see ReturnObject} that will contain either an object or an error
- * value of the right kind (as defined in {@see ErrorMessage}). 
+ * value of the right kind (as defined in {@see ErrorMessage}).
+ *
+ * 2 -  Write an implementation of interface List based on arrays called
+ *      ArrayList.
  * 
  * @author Ginestra Ferraro
  */
 
 public class ArrayList implements List {
 
-	private Object[] listOfItems;
-	private int size;
+    private Object[] listOfItems;
+    private int size;
 
-	private final static int DEFAULT_SIZE = 25;
-	
-	// Constructor
-	public ArrayList() {
-		this.listOfItems = new Object[ArrayList.DEFAULT_SIZE];
-		this.size = size;
-	}
+    private final static int DEFAULT_SIZE = 25;
+    
+    // Constructor
+    public ArrayList() {
+        this.listOfItems = new Object[ArrayList.DEFAULT_SIZE];
+        this.size = size;
+    }
 
-	/**
-	 * Returns true if the list is empty, false otherwise. 
-	 * 
-	 * @return true if the list is empty, false otherwise. 
-	 */
+    /**
+     * Returns true if the list is empty, false otherwise. 
+     * 
+     * @return true if the list is empty, false otherwise. 
+     */
 
-	@Override
-	public boolean isEmpty() {
-		if (size == 0) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean isEmpty() {
+        if (size == 0) {
+            return true;
+        }
+        return false;
+    }
 
-	/**
-	 * Returns the number of items currently in the list.
-	 * 
-	 * @return the number of items currently in the list
-	 */
+    /**
+     * Returns the number of items currently in the list.
+     * 
+     * @return the number of items currently in the list
+     */
 
-	@Override
-	public int size() {
-		return size;
-	}
+    @Override
+    public int size() {
+        return size;
+    }
 
-	/**
-	 * Returns the element at the given position. 
-	 * 
-	 * If the index is negative or greater or equal than the size of
-	 * the list, then an appropriate error must be returned.
-	 * 
-	 * @param index the position in the list of the item to be retrieved
-	 * @return the element or an appropriate error message, 
-	 *         encapsulated in a ReturnObject
-	 */
+    /**
+     * Returns the element at the given position. 
+     * 
+     * If the index is negative or greater or equal than the size of
+     * the list, then an appropriate error must be returned.
+     * 
+     * @param index the position in the list of the item to be retrieved
+     * @return the element or an appropriate error message, 
+     *         encapsulated in a ReturnObject
+     */
 
-	@Override
-	public ReturnObject get(int index) {
+    @Override
+    public ReturnObject get(int index) {
 
-		if (isEmpty()) {
-			System.out.println("Error: Empty structure!");
-			return new ReturnObjectImpl(ErrorMessage.EMPTY_STRUCTURE);
-		} else if (index < 0 || index >= size) {
-			System.out.println("Error: Index out of bounds!");
-			return new ReturnObjectImpl(ErrorMessage.INDEX_OUT_OF_BOUNDS);
-		}
+        if (isEmpty()) {
+            System.out.println("Error: Empty structure!");
+            return new ReturnObjectImpl(ErrorMessage.EMPTY_STRUCTURE);
+        } else if (index < 0 || index >= size) {
+            System.out.println("Error: Index out of bounds!");
+            return new ReturnObjectImpl(ErrorMessage.INDEX_OUT_OF_BOUNDS);
+        }
 
-		return new ReturnObjectImpl(listOfItems[index]);
-	}
+        return new ReturnObjectImpl(listOfItems[index]);
+    }
 
-	/**
-	 * Returns the elements at the given position and removes it
-	 * from the list. The indeces of elements after the removed
-	 * element must be updated accordignly.
-	 * 
-	 * If the index is negative or greater or equal than the size of
-	 * the list, then an appropriate error must be returned.
-	 * 
-	 * @param index the position in the list of the item to be retrieved
-	 * @return the element or an appropriate error message, 
-	 *         encapsulated in a ReturnObject
-	 */
+    /**
+     * Returns the elements at the given position and removes it
+     * from the list. The indeces of elements after the removed
+     * element must be updated accordignly.
+     * 
+     * If the index is negative or greater or equal than the size of
+     * the list, then an appropriate error must be returned.
+     * 
+     * @param index the position in the list of the item to be retrieved
+     * @return the element or an appropriate error message, 
+     *         encapsulated in a ReturnObject
+     */
 
-	@Override
-	public ReturnObject remove(int index) {
+    @Override
+    public ReturnObject remove(int index) {
 
-		if (isEmpty()) {
-			System.out.println("Error: Empty structure!");
-			return new ReturnObjectImpl(ErrorMessage.EMPTY_STRUCTURE);
-		} else if (index < 0 || index >= size) {
-			System.out.println("Error: Index out of bounds!");
-			return new ReturnObjectImpl(ErrorMessage.INDEX_OUT_OF_BOUNDS);
-		}
+        if (isEmpty()) {
+            System.out.println("Error: Empty structure!");
+            return new ReturnObjectImpl(ErrorMessage.EMPTY_STRUCTURE);
+        } else if (index < 0 || index >= size) {
+            System.out.println("Error: Index out of bounds!");
+            return new ReturnObjectImpl(ErrorMessage.INDEX_OUT_OF_BOUNDS);
+        }
 
-		// Object removedItem = listOfItems[index];
-		ReturnObject removedItem = get(index);
+        // Object removedItem = listOfItems[index];
+        ReturnObject removedItem = get(index);
 
-		for (int i = index + 1; i < size; i++) {
-			listOfItems[i] = listOfItems[i-1];
-		}
-		listOfItems[size - 1] = null;
-		listOfItems[listOfItems.length - 1] = null;
-		size--;
+        for (int i = index + 1; i < size; i++) {
+            listOfItems[i] = listOfItems[i-1];
+        }
+        listOfItems[size - 1] = null;
+        listOfItems[listOfItems.length - 1] = null;
+        size--;
 
-		// return new ReturnObjectImpl(removedItem);
-		return removedItem;
-	}
+        // return new ReturnObjectImpl(removedItem);
+        return removedItem;
+    }
 
-	/**
-	 * Adds an element to the list, inserting it at the given
-	 * position. The indeces of elements at and after that position
-	 * must be updated accordignly.
-	 * 
-	 * If the index is negative or greater or equal than the size of
-	 * the list, then an appropriate error must be returned.
-	 * 
-	 * If a null object is provided to insert in the list, the
-	 * request must be ignored and an appropriate error must be
-	 * returned.
-	 * 
-	 * @param index the position at which the item should be inserted in
-	 *              the list
-	 * @param item the value to insert into the list
-	 * @return a ReturnObject, empty if the operation is successful
-	 *         or containing an appropriate error message otherwise
-	 */
+    /**
+     * Adds an element to the list, inserting it at the given
+     * position. The indeces of elements at and after that position
+     * must be updated accordignly.
+     * 
+     * If the index is negative or greater or equal than the size of
+     * the list, then an appropriate error must be returned.
+     * 
+     * If a null object is provided to insert in the list, the
+     * request must be ignored and an appropriate error must be
+     * returned.
+     * 
+     * @param index the position at which the item should be inserted in
+     *              the list
+     * @param item the value to insert into the list
+     * @return a ReturnObject, empty if the operation is successful
+     *         or containing an appropriate error message otherwise
+     */
 
-	@Override
-	public ReturnObject add(int index, Object item) {
-		if (index < 0 || index >= size) {
-			System.out.println("Error: Index out of bounds!");
-			return new ReturnObjectImpl(ErrorMessage.INDEX_OUT_OF_BOUNDS);
-		} else if (item == null) {
-			System.out.println("Error: Invalid argument!");
-			return new ReturnObjectImpl(ErrorMessage.INVALID_ARGUMENT);
-		} else {
-			if (listOfItems.length == size) {
-				moreItems();
-			}
-			int current;
-			for(current = size(); current > index; current--) {
-				listOfItems[current + 1] = listOfItems[current];
-			}
-			listOfItems[index] = item;
-			size = size() + 1;
-			return new ReturnObjectImpl(ErrorMessage.NO_ERROR);
-		}
-	}
+    @Override
+    public ReturnObject add(int index, Object item) {
+        if (index < 0 || index >= size) {
+            System.out.println("Error: Index out of bounds!");
+            return new ReturnObjectImpl(ErrorMessage.INDEX_OUT_OF_BOUNDS);
+        } else if (item == null) {
+            System.out.println("Error: Invalid argument!");
+            return new ReturnObjectImpl(ErrorMessage.INVALID_ARGUMENT);
+        } else {
+            if (listOfItems.length == size) {
+                moreItems();
+            }
+            int current;
+            for(current = size(); current > index; current--) {
+                listOfItems[current + 1] = listOfItems[current];
+            }
+            listOfItems[index] = item;
+            size = size() + 1;
+            return new ReturnObjectImpl(ErrorMessage.NO_ERROR);
+        }
+    }
 
-	/**
-	 * Adds an element at the end of the list.
-	 * 
-	 * If a null object is provided to insert in the list, the
-	 * request must be ignored and an appropriate error must be
-	 * returned.
-	 * 
-	 * @param item the value to insert into the list
-	 * @return a ReturnObject, empty if the operation is successful
-	 *         or containing an appropriate error message otherwise
-	 */
+    /**
+     * Adds an element at the end of the list.
+     * 
+     * If a null object is provided to insert in the list, the
+     * request must be ignored and an appropriate error must be
+     * returned.
+     * 
+     * @param item the value to insert into the list
+     * @return a ReturnObject, empty if the operation is successful
+     *         or containing an appropriate error message otherwise
+     */
 
-	@Override
-	public ReturnObject add(Object item) {
-		if(item == null) {
-			return new ReturnObjectImpl(ErrorMessage.INVALID_ARGUMENT);
-		} else {
-			if(size() == listOfItems.length) {
-				moreItems();
-			}
-			listOfItems[size()] = item;
-			size = size()+ 1;
-			return new ReturnObjectImpl(ErrorMessage.NO_ERROR);
-		}
-	}
+    @Override
+    public ReturnObject add(Object item) {
+        if(item == null) {
+            return new ReturnObjectImpl(ErrorMessage.INVALID_ARGUMENT);
+        } else {
+            if(size() == listOfItems.length) {
+                moreItems();
+            }
+            listOfItems[size()] = item;
+            size = size()+ 1;
+            return new ReturnObjectImpl(ErrorMessage.NO_ERROR);
+        }
+    }
 
-	/**
-	 * Assign more space to listOfItems array
-	 */
-	private void moreItems(){
-		int currentSpace = listOfItems.length;
-		Object[] newListOfItems = new Object[currentSpace * 2];
-		for(int i = 0; i < currentSpace; i++){
-			newListOfItems[i] = listOfItems[i];
-		}
-		listOfItems = newListOfItems;
-	}
+    /**
+     * Assign more space to listOfItems array
+     */
+    private void moreItems(){
+        int currentSpace = listOfItems.length;
+        Object[] newListOfItems = new Object[currentSpace * 2];
+        for(int i = 0; i < currentSpace; i++){
+            newListOfItems[i] = listOfItems[i];
+        }
+        listOfItems = newListOfItems;
+    }
 }

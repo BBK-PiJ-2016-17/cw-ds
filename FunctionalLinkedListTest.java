@@ -12,6 +12,10 @@ public class FunctionalLinkedListTest {
 
 		FunctionalList thisTestLinkedList = new FunctionalLinkedList();
 
+		System.out.println("\n==== Test Empty List ====\n");
+
+		System.out.println(thisTestLinkedList.get(0));
+
 		thisTestLinkedList.add("One");
 		thisTestLinkedList.add("Two");
 

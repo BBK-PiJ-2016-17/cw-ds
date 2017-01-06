@@ -8,7 +8,13 @@
  */
 
 public class FunctionalLinkedListTest {
-	public static void main(String[] args) {
+	
+    public static void main(String[] args) {
+        FunctionalLinkedListTest test = new FunctionalLinkedListTest();
+        test.launch();
+    }
+
+	public void launch() {
 
 		FunctionalList thisTestLinkedList = new FunctionalLinkedList();
 

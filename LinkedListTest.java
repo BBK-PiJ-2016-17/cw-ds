@@ -1,5 +1,20 @@
+/**
+ * 3 -	Write an implementation of interface List based on pointers called
+ *		LinkedList.
+ *
+ *		TEST
+ * 
+ * @author Ginestra Ferraro
+ */
+
 public class LinkedListTest {
-	public static void main(String[] args) {
+	
+    public static void main(String[] args) {
+        LinkedListTest test = new LinkedListTest();
+        test.launch();
+    }
+
+	public void launch() {
 
 		List newLinkedList = new LinkedList();
 		

@@ -27,7 +27,6 @@ public class StackImpl extends AbstractStack implements Stack {
      * @return true if the stack is empty, false otherwise. 
      */
 
-    @Override
     public boolean isEmpty() {
 
         if(internalList.size() == 0) {
@@ -42,6 +41,7 @@ public class StackImpl extends AbstractStack implements Stack {
      * 
      * @return the number of items currently in the stack
      */
+
     public int size() {
         return internalList.size();
     }

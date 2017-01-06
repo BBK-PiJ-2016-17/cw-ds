@@ -8,8 +8,13 @@
  */
 
 public class FunctionalArrayListTest {
-	public static void main(String[] args) {
+	
+    public static void main(String[] args) {
+        FunctionalArrayListTest test = new FunctionalArrayListTest();
+        test.launch();
+    }
 
+	public void launch() {
 		FunctionalList thisTestList = new FunctionalArrayList();
 
 		thisTestList.add("One");
